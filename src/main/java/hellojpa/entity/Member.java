@@ -2,11 +2,11 @@ package hellojpa.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.Date;
 
-@Entity @Getter @Setter
+@Entity @Getter @Setter @ToString
 public class Member {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -15,6 +15,10 @@ public class Member {
     private String name;
     private int age;
 
-    @Column(name = "TEAM_ID")
-    private Long teamId;
+//    @Column(name = "TEAM_ID")
+//    private Long teamId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "TEAM_ID")
+    private Team team;
 }
